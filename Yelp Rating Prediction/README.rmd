@@ -1,0 +1,4 @@
+This project mainly performs Web-Scraping of reviews, ratings and much of other content from Yelp's website for three different cuisines - Italian, Indian and Japanese.
+I have also placed a limit on how many reviews to extract (approx. 10K per cuisine). Kindly follow "Final project Summary.docx" file to get an idea of workflow of the project.
+Although there are many different applications of the content I scraped but for this project I have focussed only on creating a predictive model to predict whether a user will like
+a particular restaurant or not.
