@@ -1,2 +1,0 @@
-This project is a classification based project that attempts at predicting whether a good will be sent back to inventory due to some issue.
-It uses 23 variables at predictors. This project involves data scrubbing as well as application of supervised learning machine learning algorithms.
