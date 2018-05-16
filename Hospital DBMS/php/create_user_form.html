@@ -1,0 +1,49 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/final_project_630/css/commons.css"/>
+        <title>Create User Form</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+          <link rel="stylesheet" href="/resources/demos/style.css">
+          <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+          <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+          <script>
+          $( function() {
+            var date = $('#date').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+          } );
+          </script>
+            
+        <script src="/final_project_630/js/mydatepicker.js"></script>
+        <script>
+            function generate_my_id(){
+                document.getElementById("generate_id").value = Math.floor(Math.random()*1000);
+            }
+        </script>
+    </head>
+    <body>
+        <form action="saving_new_user.php" method="post">
+            <div>
+                <input type="button" onclick="generate_my_id()" value ="generate id" class="button"/>
+                <input type="text" id="generate_id" name="patient_id" readonly/><br>
+                Name: <input type="text" name="name_of_patient" class="text"/><br>
+                Address: <input type="text" name="address" class="text"/><br>
+                Phone: <input type="number" name="phone" class="text"/><br>
+                Gender: <input type="radio" value="M" name="gender">Male<br>
+                        <input type="radio" value="F" name="gender">Female<br>
+                        DOB: <input type="text" id="date" name="dob" class="text"/>
+<!--                <script>
+                    $("input[type=date]").datepicker();
+                </script>-->
+            </div>
+            
+            <div id ="test"></div>
+            <input type="submit" value ="submit" class="button"/>
+            <a href='/final_project_630/index.php' class='button'>Go to Home Page</a>
+        </form>
+    </body>
+</html>
