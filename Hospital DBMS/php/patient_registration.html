@@ -1,0 +1,73 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="/final_project_630/css/commons.css"/>
+        <title>Register Patient Transaction</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+          <script>
+          $( function() {
+            var date = $('.date').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+          } );
+          
+          function calculate_bill(){
+              //document.getElementById("final_bill").value="d";
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("final_bill").value = this.responseText;
+                }
+              };
+              xhttp.open("GET", "calculate_bill.php?proc="+document.getElementById('procedure_id').value+
+                                "&third_party="+document.getElementById('third_party').value, true);
+              xhttp.send(); 
+          }
+          function patient_details(my_id){
+              var xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("test").innerHTML = this.responseText;
+                }
+              };
+              xhttp.open("GET", "extract_patient_details.php?my_id="+my_id, true);
+              xhttp.send();           
+          }
+          </script>
+    </head>
+    <body>
+        <form action="saving_patient_transaction.php" method="post">
+            Patient ID:<input type="number" name="patient_id" class="text" 
+                              onkeyup="patient_details(this.value)"/><br> <!--assumed to be known by patient or can be found by search-->
+            Select Procedure:<select name="procedure_id" id="procedure_id" onchange="calculate_bill()">
+                <option value="P050">P050: Regular Consultation</option>
+                <option value="P001">P001: Blood Sugar</option>
+                <option value="P002">P002: Blood Pressure</option>
+                <option value="P003">P003: ECG</option>
+                <option value="P004">P004: Ultrasound</option>
+                <option value="P005">P005: MRI</option>
+            </select><br>
+            Prescription suggested(if any):<input type="text" name="prescription" class="text"/><br>
+            Hospital ID: <input type="number" name="hospital_id" class="text"/><br><!-- assumed to be known by hosptial staff as it will be repeated everyday-->
+            Check-in Date: <input type="text" class="date" name="check_in"/><br>
+            Check-out Date: <input type="text" class="date" name="check_out"/><br>
+            Third-part service (if any):
+            <select name="third_party_service" id="third_party" onchange="calculate_bill()">
+                <option value="999">No extra services</option>
+                <option value="1000">Medicine Transportation to other branch</option>
+                <option value="1001">Medicine Transportation to user</option>
+                <option value="1002">Organ Transportation</option>
+            </select><br>
+            Cost of Bill: <input name="cost_of_bill" class="text" id="final_bill" readonly/><br>
+            <input type="submit" value="Submit" class="button"/>
+            <a href='/final_project_630/index.php' class='button'>Go to Home Page</a>
+            <div id="test"></div>
+        </form>
+    </body>
+</html>
